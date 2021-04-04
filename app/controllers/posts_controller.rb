@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
   
+  def change
+    drop_table :rocords
+  end
+  
   #ユーザーのログイン状態を確かめる。indexはログインしてなくても閲覧可能にしてます。
   before_action :authenticate_user!, only: [:show, :create]
   

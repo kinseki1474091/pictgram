@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 2021_01_30_093701) do
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "comment_content"
     t.bigint "user_id"
-    t.bigint "post_id"
+    t.bigint "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["topic_id"], name: "index_comments_on_topic_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -27,14 +27,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_093701) do
     t.integer "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "content"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -53,7 +45,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_093701) do
     t.string "password_digest"
   end
 
-  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "topics"
   add_foreign_key "comments", "users"
-  add_foreign_key "posts", "users"
 end
